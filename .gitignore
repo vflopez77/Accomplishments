@@ -1,5 +1,5 @@
 config.py
-~$AccomplishmentsV4.xlsm
+~$AccomplishmentsV4*.*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
