@@ -35,3 +35,5 @@ flag_file_txt.close()
 # Open file permissions for Excel
 os.chmod ("/Users/victor/Downloads/Today.txt", 0o777)
 os.chmod("data/script_completed.txt", 0o777)
+
+# Files are cleaned up by Excel
