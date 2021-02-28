@@ -11,31 +11,27 @@
 import pandas as pd
 import csv
 import os
+from datetime import datetime
 
 # Read raw tasks file and convert to dataframe
 wt_tasks_csv = os.path.join("data","tasks.csv")
 wt_tasks_df = pd.read_csv(wt_tasks_csv)
 
 # Create summary dataframe for Status and Weight type(date)
-sum_tasks_df = pd.DataFrame(wt_tasks_df.groupby(['Type'])['Status','Weight'].sum())
+sum_tasks_df = pd.DataFrame(wt_tasks_df.groupby(['Type','Status'])[['ToDoW','DoneW']].sum())
 
-# Add Count column
-sum_tasks_df['Count'] = wt_tasks_df.groupby(['Type'])['Status'].count()
-#wt_tasks_df.groupby(['Type'])['Status'].count()
+# Group by date to take into account dates with Todo and Done records
+sum_tasks_final_df = pd.DataFrame(sum_tasks_df.groupby(['Type'])[['ToDoW','DoneW']].sum())
 
-# Add number of ToDo tasks
-sum_tasks_df['ToDo'] = wt_tasks_df.groupby(['Type'])['Status'].count()-wt_tasks_df.groupby(['Type'])['Status'].sum()
-
-# Renaming Status as Done
-sum_tasks_df.rename(columns={'Status': 'Done'}, inplace=True)
-
-# Change to order of columns
-# Currently: ['Done', 'Weight', 'Count', 'ToDo']
-# We want ['Done', 'ToDo', 'Weight', 'Count']
-st_cols = ['Done', 'ToDo', 'Weight', 'Count']
-# Change column order
-sum_tasks_df=sum_tasks_df[st_cols]
-
-# Exporting summary dataframe to summary file
+# Export final summary dataframe to summary file
 tasks_sum_csv = os.path.join('data', 'tasks_sum.csv')
-sum_tasks_df.to_csv(tasks_sum_csv)
+sum_tasks_final_df.to_csv(tasks_sum_csv)
+
+# Write Flag File with Today's Date
+flag_file_txt = open(os.path.join("data", "script_completed.txt"), "w")
+flag_file_txt.write(datetime.today().strftime('%Y-%m-%d'))
+flag_file_txt.close()
+
+# Open file permissions for Excel
+os.chmod ("/Users/victor/Downloads/Today.txt", 0o777)
+os.chmod("data/script_completed.txt", 0o777)
