@@ -5,13 +5,12 @@ import sys
 # Create the StringText Class
 class StringText(object):
     
-    # This is the maximum length that can be exported from the outliner without wrapping
-    maxLength = 59
-    
     # Constructor
     def __init__(self, content):
         self.content = content
         self.length = len(str(content))
+        # This is the maximum length that can be exported from the outliner without wrapping
+        self.maxLength = 59
         
     # Method to check if string is too long    
     def isTooLong(self):
@@ -22,7 +21,7 @@ class StringText(object):
     
     # Method to get absolute character difference
     def charDiff(self):
-        return(abs(maxLength-self.length))
+        return(abs(self.maxLength-self.length))
     
     # Method to determine if character difference is only one (for pluralization)
     def oneCharOverUnder(self):
