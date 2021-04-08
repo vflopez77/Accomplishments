@@ -14,7 +14,7 @@ class StringText(object):
         
     # Method to check if string is too long    
     def isTooLong(self):
-        if self.length > 59:
+        if self.length > self.maxLength:
             return(True)
         else:
             return(False)
