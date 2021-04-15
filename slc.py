@@ -30,6 +30,7 @@ class StringText(object):
         else:
             return(False)
             
+# * This is where the program is actually run *
 
 # Create instance of the class from the command line parameter
 myString = StringText(sys.argv[1])
@@ -39,8 +40,8 @@ print(f'The length of the string "{myString.content}" is {myString.length}. ')
 
 # Case when the string is too long
 if myString.isTooLong() == True:
-    print(f'The string is too long please shorten by {myString.charDiff()} character', end = '')
-    # Checking for a single character difference
+    print(f'The string is too long.  Please shorten by {myString.charDiff()} character', end = '')
+    # Checking for a single character difference for correct pluralization
     if myString.oneCharOverUnder() == False:
         print('s.')
     else:
@@ -48,8 +49,8 @@ if myString.isTooLong() == True:
         
 # Case when the string is not too long
 else:
-    print(f'The string is not too long with {myString.charDiff()} character', end = '')
-    # Checking for a single character difference
+    print(f'The string is not too long, with {myString.charDiff()} character', end = '')
+    # Checking for a single character difference for correct pluralization
     if myString.oneCharOverUnder() == False:
         print('s', end = '')
     print(' to spare.')
