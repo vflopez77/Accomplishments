@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# 1. Import process tasks to dataframe
+# 1. Import processed tasks to dataframe
 # 2. Summarize status by type/date
 # 3. Summarize weight by type/date
 # 4. Calculate Dones and ToDos
@@ -33,7 +33,12 @@ flag_file_txt.write(datetime.today().strftime('%Y-%m-%d'))
 flag_file_txt.close()
 
 # Open file permissions for Excel
+# Check if this is necessary
 os.chmod ("/Users/victor/Downloads/Today.txt", 0o777)
 os.chmod("data/script_completed.txt", 0o777)
-
 # Files are cleaned up by Excel
+
+# Completion Notificaton
+print('+-----------------------------------------------------------------------+')
+print('| The Summary Data has been processed and is ready for update in Excel. |')
+print('+-----------------------------------------------------------------------+')
