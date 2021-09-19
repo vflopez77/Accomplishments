@@ -51,8 +51,8 @@ except NameError:
     print('| The Today.txt file is good and ready to be processed. |')
     print('+-------------------------------------------------------+')
 else:
-    print('+--------------------------------------------------------------------+')
-    print('| The item(s) above are too long to export and need to be addressed. |')
-    print('+--------------------------------------------------------------------+')
+    print('+----------------------------------------------------------------------------+')
+    print('| *** The above item(s) are too long to export and need to be addressed! *** |')
+    print('+----------------------------------------------------------------------------+')
 
 
