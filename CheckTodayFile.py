@@ -50,17 +50,19 @@ for line in todayfile_df.index:
 try:
     badrow
 except NameError:
+    # Today.txt file is good
     print('+-------------------------------------------------------+')
     print('| The Today.txt file is good and ready to be processed. |')
     print('+-------------------------------------------------------+')
 else:
+    # Today.txt file is bad
     if badrowcount > 1:
         print('+--------------------------------------------------------------------------+')
         print('| *** The above items are too long to export and need to be addressed! *** |')
         print('+--------------------------------------------------------------------------+')
-        os.system('bash NixToday.sh')
     else:
         print('+-------------------------------------------------------------------------+')
         print('| *** The above item is too long to export and needs to be addressed! *** |')
         print('+-------------------------------------------------------------------------+')
-        os.system('bash NixToday.sh')
+    # Delete bad Today.txt file
+    os.system('bash NixToday.sh')

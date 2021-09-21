@@ -68,17 +68,14 @@ else:
         print('| *** The above items are too long to export and need to be addressed! *** |')
         print('+--------------------------------------------------------------------------+')
         # Delete bad Today.txt file
-        os.system('bash NixToday.sh')
-        # Exit program if bad lines are found
-        exit()
     else:
         print('+-------------------------------------------------------------------------+')
         print('| *** The above item is too long to export and needs to be addressed! *** |')
         print('+-------------------------------------------------------------------------+')
-        # Delete bad Today.txt file
-        os.system('bash NixToday.sh')
-        # Exit program if bad lines are found
-        exit()
+    # Delete bad Today.txt file
+    os.system('bash NixToday.sh')
+    # Exit program if bad lines are found
+    exit()
 
 # Read raw tasks file and convert to dataframe
 wt_tasks_csv = os.path.join("data","tasks.csv")
