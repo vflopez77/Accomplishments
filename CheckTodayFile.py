@@ -26,6 +26,7 @@ os.chmod ("/Users/victor/Downloads/Today.txt", 0o777)
 # Loop through the exported Today.txt file to find any entries that are too long
 # Initialize row counter to help retrieve bad row
 rownum = 0
+badrowcount = 0
 # Loop through file using index
 for line in todayfile_df.index: 
     # Pulling out current field entry
@@ -38,6 +39,8 @@ for line in todayfile_df.index:
         print(currline)
         # Getting too long line number
         badrow = rownum - 1
+        # Incrementing the bad row count
+        badrowcount += 1
         # Displaying too long line
         print(todayfile_df.iloc[[badrow]])
     # incrementing row number
@@ -51,8 +54,11 @@ except NameError:
     print('| The Today.txt file is good and ready to be processed. |')
     print('+-------------------------------------------------------+')
 else:
-    print('+----------------------------------------------------------------------------+')
-    print('| *** The above item(s) are too long to export and need to be addressed! *** |')
-    print('+----------------------------------------------------------------------------+')
-
-
+    if badrowcount > 1:
+        print('+--------------------------------------------------------------------------+')
+        print('| *** The above items are too long to export and need to be addressed! *** |')
+        print('+--------------------------------------------------------------------------+')
+    else:
+        print('+-------------------------------------------------------------------------+')
+        print('| *** The above item is too long to export and needs to be addressed! *** |')
+        print('+-------------------------------------------------------------------------+')
