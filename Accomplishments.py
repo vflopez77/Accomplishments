@@ -59,9 +59,9 @@ for line in todayfile_df.index:
 try:
     badrow
 except NameError:
-    print('+-------------------------------------------------------+')
-    print('| The Today.txt file is good and ready to be processed. |')
-    print('+-------------------------------------------------------+')
+    print('+-----------------------------+')
+    print('| The Today.txt file is good. |')
+    print('+-----------------------------+')
 else:
     if badrowcount > 1:
         print('+--------------------------------------------------------------------------+')
