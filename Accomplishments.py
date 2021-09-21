@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# 0. Check Today.txt file for overlong entries
 # 1. Import processed tasks to dataframe
 # 2. Summarize status by type/date
 # 3. Summarize weight by type/date
@@ -12,6 +13,72 @@ import pandas as pd
 import csv
 import os
 from datetime import datetime
+
+# Pre-Process Today.txt to Identify Overlong Entries
+
+# Identify file path
+todayfile = "/Users/victor/Downloads/Today.txt"
+
+# Check to see of file exists
+try:
+    # Using pipe as separator because it is not likely to be used in the outline
+    todayfile_df = pd.read_csv(todayfile, sep = "|")
+except FileNotFoundError:
+    print('+----------------------------------------------------+')
+    print('| *** The Today.txt file has not been generated! *** |')
+    print('+----------------------------------------------------+')
+    exit()
+
+# This works but doesn't stop being prompted in Excel - maybe chown and sudo?
+os.chmod ("/Users/victor/Downloads/Today.txt", 0o777)
+
+# Loop through the exported Today.txt file to find any entries that are too long
+# Initialize row counter to help retrieve bad row
+rownum = 0
+badrowcount = 0
+# Loop through file using index
+for line in todayfile_df.index: 
+    # Pulling out current field entry
+    currline = todayfile_df['Outline: Today'][line]
+    # Stripping leading spaces
+    currline = currline.lstrip()
+    # Checking for correct start of line 
+    if currline[0:1] != '-':
+        # Showing incorrect extra line
+        print(currline)
+        # Getting too long line number
+        badrow = rownum - 1
+        # Incrementing the bad row count
+        badrowcount += 1
+        # Displaying too long line
+        print(todayfile_df.iloc[[badrow]])
+    # incrementing row number
+    rownum = rownum + 1
+
+# Testing if there were any bad rows to display final status message
+try:
+    badrow
+except NameError:
+    print('+-------------------------------------------------------+')
+    print('| The Today.txt file is good and ready to be processed. |')
+    print('+-------------------------------------------------------+')
+else:
+    if badrowcount > 1:
+        print('+--------------------------------------------------------------------------+')
+        print('| *** The above items are too long to export and need to be addressed! *** |')
+        print('+--------------------------------------------------------------------------+')
+        # Delete bad Today.txt file
+        os.system('bash NixToday.sh')
+        # Exit program if bad lines are found
+        exit()
+    else:
+        print('+-------------------------------------------------------------------------+')
+        print('| *** The above item is too long to export and needs to be addressed! *** |')
+        print('+-------------------------------------------------------------------------+')
+        # Delete bad Today.txt file
+        os.system('bash NixToday.sh')
+        # Exit program if bad lines are found
+        exit()
 
 # Read raw tasks file and convert to dataframe
 wt_tasks_csv = os.path.join("data","tasks.csv")

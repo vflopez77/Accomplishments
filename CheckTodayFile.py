@@ -58,7 +58,9 @@ else:
         print('+--------------------------------------------------------------------------+')
         print('| *** The above items are too long to export and need to be addressed! *** |')
         print('+--------------------------------------------------------------------------+')
+        os.system('bash NixToday.sh')
     else:
         print('+-------------------------------------------------------------------------+')
         print('| *** The above item is too long to export and needs to be addressed! *** |')
         print('+-------------------------------------------------------------------------+')
+        os.system('bash NixToday.sh')
