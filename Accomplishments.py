@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# 0. Check Today.txt file for overlong entries
-# 1. Import processed tasks to dataframe
-# 2. Summarize status by type/date
-# 3. Summarize weight by type/date
-# 4. Calculate Dones and ToDos
-# 4. Export summary file for Excel import
+# 1. Check Today.txt file for existence
+# 2. Check Today.txt file for overlong entries
+# 3. Import processed tasks to dataframe
+# 4. Summarize status by type/date
+# 5. Summarize weight by type/date
+# 6. Calculate Dones and ToDos
+# 7. Export summary file for Excel import
 
 # Import Dependencies
 import pandas as pd
@@ -27,6 +28,7 @@ except FileNotFoundError:
     print('+----------------------------------------------------+')
     print('| *** The Today.txt file has not been generated! *** |')
     print('+----------------------------------------------------+')
+    # Exit program if file does not exist
     exit()
 
 # This works but doesn't stop being prompted in Excel - maybe chown and sudo?
@@ -59,15 +61,13 @@ for line in todayfile_df.index:
 try:
     badrow
 except NameError:
-    print('+-----------------------------+')
-    print('| The Today.txt file is good. |')
-    print('+-----------------------------+')
+    # Only report a bad file and do nothing programmatically
+    pass
 else:
     if badrowcount > 1:
         print('+--------------------------------------------------------------------------+')
         print('| *** The above items are too long to export and need to be addressed! *** |')
         print('+--------------------------------------------------------------------------+')
-        # Delete bad Today.txt file
     else:
         print('+-------------------------------------------------------------------------+')
         print('| *** The above item is too long to export and needs to be addressed! *** |')
