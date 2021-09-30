@@ -72,7 +72,7 @@ else:
         print('+-------------------------------------------------------------------------+')
         print('| *** The above item is too long to export and needs to be addressed! *** |')
         print('+-------------------------------------------------------------------------+')
-    # Delete bad Today.txt file
+    # Delete bad Today*.txt file(s) 
     os.system('bash NixToday.sh')
     # Exit program if bad lines are found
     exit()
